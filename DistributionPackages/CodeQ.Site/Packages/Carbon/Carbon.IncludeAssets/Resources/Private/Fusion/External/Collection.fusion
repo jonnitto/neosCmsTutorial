@@ -1,0 +1,16 @@
+/**
+ * This prototype output a collection of files
+ */
+
+prototype(Carbon.IncludeAssets:Collection) < prototype(Neos.Fusion:Component) {
+    collection = ${[]}
+    assetPackage = null
+    cacheBuster = ${Configuration.setting('Carbon.IncludeAssets.Default.CacheBuster')}
+    paths = ${Configuration.setting('Carbon.IncludeAssets.Default.Path')}
+
+    renderer = afx`
+        <Neos.Fusion:Collection @if.render={props.assetPackage} collection={props.collection} @children='itemRenderer'>
+            <Carbon.IncludeAssets:File file={item} assetPackage={props.assetPackage} cacheBuster={props.cacheBuster} paths={props.paths} />
+        </Neos.Fusion:Collection>
+    `
+}
